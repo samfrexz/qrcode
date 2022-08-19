@@ -1,3 +1,13 @@
+// make sure sw is supported
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('../../sw_cached_site.js')
+      .then(reg => console.log('service worker registered'))
+      .catch(err => console.log(`service worker error: ${err}`));
+  })
+
+}
 
 const form = document.getElementById('generate-form');
 const qr = document.getElementById('qrcode')
@@ -20,8 +30,6 @@ const onGenerateSubmit =(e)=> {
       createSaveBtn(saveUrl);
     }, 50)
   }, 1000)
-
-  // console.log(url, size)
 }
 
 const generateQRCode = (url, size)=> {
